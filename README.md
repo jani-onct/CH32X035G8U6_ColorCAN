@@ -52,8 +52,6 @@ XAコネクタを下にした状態で，**左に倒すとON，右に倒すとOF
 
 一番下の `TERM` は120 Ω終端のスイッチです．CANバスの両端でONにします．
 
-KHS42Eを取り付ける場合は，本体の `ON` 印字を左，本体の `1` をXAコネクタ側に向けます．[KHS42Eの向きが分かる商品写真](https://akizukidenshi.com/img/goods/3/108929.jpg)
-
 ## CANを受信する
 
 **1 Mbps，Classic CAN，標準11-bit ID，データ長8バイト．** 複数バイトの数値は下位バイトから並びます．
@@ -80,7 +78,7 @@ CAN ID  DLC  データ（16進）
 - **`0x240` RGBC** — 2バイトずつ読むと，R = 171，G = 181，B = 184，Clear = 532．
 - **`0x248` ハートビート** — プロトコル版1，測定有効，測定成功11回，起動から1,121 ms．
 
-このFWは**ColorCAN 1台が送信するベンチ試験用**です．CH32X035のTIM1とDMAで送信と信号の読み返しを行います．複数の送信ノードが共存する運用バスに組み込むには，CANの調停，再送，エラー処理を備えた実装が必要です．ベンチ試験ではノード0の両フレームを受信確認済みです．
+両FWは**ColorCAN 1台が送信するベンチ試験用**です．複数の送信ノードが共存する運用バスに組み込むには，CANの調停，再送，エラー処理を備えた実装が必要です．ベンチ試験ではノード0の両フレームを受信確認済みです．
 
 - [CAN仕様とデコード例](docs/CAN.md)
 - [CANデータベース（DBC，ノード0〜7）](docs/ColorCAN.dbc)
@@ -97,24 +95,38 @@ ColorCAN v1.0.0向けの1 Mbps CAN試験FWを比較しました．PIOC版ではP
 
 PIOC版では，送受信に使っていたDMAバッファ計1,080 Bが不要になり，TIM1とDMAの2チャネルが空きます．PIOC命令は184 Bです．メインCPU用のRAMは16 KiBで，残りの4 KiBをPIOC用に予約しています．メインCPUは送信完了をポーリングします．CPU負荷とスタックのピーク使用量は未計測です．
 
-PIOC版も単一送信ノードでのベンチ試験用です．実機では，ノード0のRGBC（`0x240`）とハートビート（`0x248`）が1 Mbpsの受信機に届き，RGBCの受信カウンタが増えることを確認しました．
+PIOC版の実機試験では，ノード0のRGBC（`0x240`）とハートビート（`0x248`）が1 Mbpsの受信機に届き，RGBCの受信カウンタが増えることを確認しました．
 
 ## ファームウェアの書き込み
 
-[書き込み用HEX（colorcan_can_bench.hex）](firmware/colorcan_can_bench.hex) は，ColorCAN v1.0.0のCH32X035G8U6向けTIM1＋DMA版CAN試験FWです．
+ColorCAN v1.0.0（CH32X035G8U6）用です．両方のHEXを実機で確認済みです．
+
+| 実装 | 書き込み用HEX | SHA-256 |
+|---|---|---|
+| TIM1＋DMA版 | [colorcan_can_bench.hex](firmware/colorcan_can_bench.hex) | `e5137b95454fce0f72337260dc35df75672d55e5464d6f02d0543154b2a608ff` |
+| PIOC版 | [colorcan_can_pioc.hex](firmware/colorcan_can_pioc.hex) | `1e422510251ff6a533be32441a781ffb076a6dc97d74cc8b8e29d4a9e3a904bd` |
 
 1. J2からの給電を外し，基板の `BOOT` を押しながらUSB-CをPCに接続します．
 2. [wchisp](https://github.com/ch32-rs/wchisp) を使い，`wchisp --usb info` でチップが `CH32X035G8U6` と表示されることを確認します．
-3. HEXをダウンロードしたフォルダで次のコマンドを実行し，`Verify OK` を確認します．
+3. HEXをダウンロードしたフォルダで，選んだ版のコマンドを実行し，`Verify OK` を確認します．
+
+**TIM1＋DMA版**
 
 ```sh
 wchisp --usb flash colorcan_can_bench.hex
 ```
 
+**PIOC版**
+
+```sh
+wchisp --usb flash colorcan_can_pioc.hex
+```
+
 書き込み後にUSBを挿し直す場合は，`BOOT` を押さずに接続すると通常起動します．
 
-- SHA-256 `e5137b95454fce0f72337260dc35df75672d55e5464d6f02d0543154b2a608ff`
-- [FWに含まれるch32funのライセンス](firmware/ch32fun-LICENSE.txt)
+### ファームウェアに含まれる第三者コード
+
+両方のHEXに[ch32fun](https://github.com/cnlohr/ch32fun)が含まれます．ch32funの著作権表示とMITライセンス全文を同梱しています．[ch32funのライセンス全文](firmware/ch32fun-LICENSE.txt)
 
 ## USBデバッグ
 
