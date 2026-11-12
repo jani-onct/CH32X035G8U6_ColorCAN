@@ -78,6 +78,18 @@ ONにした重みの合計がノード番号（0〜7）です。ONでGPIOはLow�
 | USB | PC16（D−）、PC17（D+） | USB-C。BOOTボタンはPC17側に接続 |
 | UARTテストパッド | PA2（TX）、PA3（RX） | TP1、TP2 |
 
+## 回路図・基板寸法図
+
+### 回路図
+
+[![ColorCAN v1.0.0の回路図](images/schematic.png)](images/schematic.png)
+
+### 基板寸法図
+
+寸法の単位はmmです。基板外形は横30 × 縦28、取付穴の中心間隔は横24 × 縦22です。
+
+[![ColorCANの基板外形と取付穴の寸法図](images/board-dimensions.png)](images/board-dimensions.png)
+
 ## 部品資料
 
 - [WCH CH32X035](https://github.com/openwch/ch32x035)
