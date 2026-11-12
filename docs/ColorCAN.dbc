@@ -1,0 +1,175 @@
+VERSION "ColorCAN protocol v1"
+
+NS_ :
+    CM_
+    BA_DEF_
+    BA_
+    BA_DEF_DEF_
+
+BS_:
+
+BU_: Receiver ColorCAN_0 ColorCAN_1 ColorCAN_2 ColorCAN_3 ColorCAN_4 ColorCAN_5 ColorCAN_6 ColorCAN_7
+
+BO_ 576 ColorCAN0_RGBC: 8 ColorCAN_0
+ SG_ Red : 0|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Green : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Blue : 32|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Clear : 48|16@1+ (1,0) [0|65535] "count" Receiver
+
+BO_ 577 ColorCAN1_RGBC: 8 ColorCAN_1
+ SG_ Red : 0|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Green : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Blue : 32|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Clear : 48|16@1+ (1,0) [0|65535] "count" Receiver
+
+BO_ 578 ColorCAN2_RGBC: 8 ColorCAN_2
+ SG_ Red : 0|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Green : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Blue : 32|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Clear : 48|16@1+ (1,0) [0|65535] "count" Receiver
+
+BO_ 579 ColorCAN3_RGBC: 8 ColorCAN_3
+ SG_ Red : 0|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Green : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Blue : 32|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Clear : 48|16@1+ (1,0) [0|65535] "count" Receiver
+
+BO_ 580 ColorCAN4_RGBC: 8 ColorCAN_4
+ SG_ Red : 0|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Green : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Blue : 32|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Clear : 48|16@1+ (1,0) [0|65535] "count" Receiver
+
+BO_ 581 ColorCAN5_RGBC: 8 ColorCAN_5
+ SG_ Red : 0|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Green : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Blue : 32|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Clear : 48|16@1+ (1,0) [0|65535] "count" Receiver
+
+BO_ 582 ColorCAN6_RGBC: 8 ColorCAN_6
+ SG_ Red : 0|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Green : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Blue : 32|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Clear : 48|16@1+ (1,0) [0|65535] "count" Receiver
+
+BO_ 583 ColorCAN7_RGBC: 8 ColorCAN_7
+ SG_ Red : 0|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Green : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Blue : 32|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ Clear : 48|16@1+ (1,0) [0|65535] "count" Receiver
+
+BO_ 584 ColorCAN0_Heartbeat: 8 ColorCAN_0
+ SG_ ProtocolVersion : 0|8@1+ (1,0) [0|255] "" Receiver
+ SG_ MeasurementValid : 8|1@1+ (1,0) [0|1] "" Receiver
+ SG_ I2CError : 9|1@1+ (1,0) [0|1] "" Receiver
+ SG_ SensorIdMismatch : 10|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Saturated : 11|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Reserved : 12|4@1+ (1,0) [0|15] "" Receiver
+ SG_ SuccessfulSamples : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ UptimeMs : 32|32@1+ (1,0) [0|4294967295] "ms" Receiver
+
+BO_ 585 ColorCAN1_Heartbeat: 8 ColorCAN_1
+ SG_ ProtocolVersion : 0|8@1+ (1,0) [0|255] "" Receiver
+ SG_ MeasurementValid : 8|1@1+ (1,0) [0|1] "" Receiver
+ SG_ I2CError : 9|1@1+ (1,0) [0|1] "" Receiver
+ SG_ SensorIdMismatch : 10|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Saturated : 11|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Reserved : 12|4@1+ (1,0) [0|15] "" Receiver
+ SG_ SuccessfulSamples : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ UptimeMs : 32|32@1+ (1,0) [0|4294967295] "ms" Receiver
+
+BO_ 586 ColorCAN2_Heartbeat: 8 ColorCAN_2
+ SG_ ProtocolVersion : 0|8@1+ (1,0) [0|255] "" Receiver
+ SG_ MeasurementValid : 8|1@1+ (1,0) [0|1] "" Receiver
+ SG_ I2CError : 9|1@1+ (1,0) [0|1] "" Receiver
+ SG_ SensorIdMismatch : 10|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Saturated : 11|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Reserved : 12|4@1+ (1,0) [0|15] "" Receiver
+ SG_ SuccessfulSamples : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ UptimeMs : 32|32@1+ (1,0) [0|4294967295] "ms" Receiver
+
+BO_ 587 ColorCAN3_Heartbeat: 8 ColorCAN_3
+ SG_ ProtocolVersion : 0|8@1+ (1,0) [0|255] "" Receiver
+ SG_ MeasurementValid : 8|1@1+ (1,0) [0|1] "" Receiver
+ SG_ I2CError : 9|1@1+ (1,0) [0|1] "" Receiver
+ SG_ SensorIdMismatch : 10|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Saturated : 11|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Reserved : 12|4@1+ (1,0) [0|15] "" Receiver
+ SG_ SuccessfulSamples : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ UptimeMs : 32|32@1+ (1,0) [0|4294967295] "ms" Receiver
+
+BO_ 588 ColorCAN4_Heartbeat: 8 ColorCAN_4
+ SG_ ProtocolVersion : 0|8@1+ (1,0) [0|255] "" Receiver
+ SG_ MeasurementValid : 8|1@1+ (1,0) [0|1] "" Receiver
+ SG_ I2CError : 9|1@1+ (1,0) [0|1] "" Receiver
+ SG_ SensorIdMismatch : 10|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Saturated : 11|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Reserved : 12|4@1+ (1,0) [0|15] "" Receiver
+ SG_ SuccessfulSamples : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ UptimeMs : 32|32@1+ (1,0) [0|4294967295] "ms" Receiver
+
+BO_ 589 ColorCAN5_Heartbeat: 8 ColorCAN_5
+ SG_ ProtocolVersion : 0|8@1+ (1,0) [0|255] "" Receiver
+ SG_ MeasurementValid : 8|1@1+ (1,0) [0|1] "" Receiver
+ SG_ I2CError : 9|1@1+ (1,0) [0|1] "" Receiver
+ SG_ SensorIdMismatch : 10|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Saturated : 11|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Reserved : 12|4@1+ (1,0) [0|15] "" Receiver
+ SG_ SuccessfulSamples : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ UptimeMs : 32|32@1+ (1,0) [0|4294967295] "ms" Receiver
+
+BO_ 590 ColorCAN6_Heartbeat: 8 ColorCAN_6
+ SG_ ProtocolVersion : 0|8@1+ (1,0) [0|255] "" Receiver
+ SG_ MeasurementValid : 8|1@1+ (1,0) [0|1] "" Receiver
+ SG_ I2CError : 9|1@1+ (1,0) [0|1] "" Receiver
+ SG_ SensorIdMismatch : 10|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Saturated : 11|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Reserved : 12|4@1+ (1,0) [0|15] "" Receiver
+ SG_ SuccessfulSamples : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ UptimeMs : 32|32@1+ (1,0) [0|4294967295] "ms" Receiver
+
+BO_ 591 ColorCAN7_Heartbeat: 8 ColorCAN_7
+ SG_ ProtocolVersion : 0|8@1+ (1,0) [0|255] "" Receiver
+ SG_ MeasurementValid : 8|1@1+ (1,0) [0|1] "" Receiver
+ SG_ I2CError : 9|1@1+ (1,0) [0|1] "" Receiver
+ SG_ SensorIdMismatch : 10|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Saturated : 11|1@1+ (1,0) [0|1] "" Receiver
+ SG_ Reserved : 12|4@1+ (1,0) [0|15] "" Receiver
+ SG_ SuccessfulSamples : 16|16@1+ (1,0) [0|65535] "count" Receiver
+ SG_ UptimeMs : 32|32@1+ (1,0) [0|4294967295] "ms" Receiver
+
+CM_ BO_ 576 "Nominal 100 ms; sent only when a measurement is valid.";
+CM_ BO_ 577 "Nominal 100 ms; sent only when a measurement is valid.";
+CM_ BO_ 578 "Nominal 100 ms; sent only when a measurement is valid.";
+CM_ BO_ 579 "Nominal 100 ms; sent only when a measurement is valid.";
+CM_ BO_ 580 "Nominal 100 ms; sent only when a measurement is valid.";
+CM_ BO_ 581 "Nominal 100 ms; sent only when a measurement is valid.";
+CM_ BO_ 582 "Nominal 100 ms; sent only when a measurement is valid.";
+CM_ BO_ 583 "Nominal 100 ms; sent only when a measurement is valid.";
+CM_ BO_ 584 "Nominal 1000 ms; also sent when the sensor flags change.";
+CM_ BO_ 585 "Nominal 1000 ms; also sent when the sensor flags change.";
+CM_ BO_ 586 "Nominal 1000 ms; also sent when the sensor flags change.";
+CM_ BO_ 587 "Nominal 1000 ms; also sent when the sensor flags change.";
+CM_ BO_ 588 "Nominal 1000 ms; also sent when the sensor flags change.";
+CM_ BO_ 589 "Nominal 1000 ms; also sent when the sensor flags change.";
+CM_ BO_ 590 "Nominal 1000 ms; also sent when the sensor flags change.";
+CM_ BO_ 591 "Nominal 1000 ms; also sent when the sensor flags change.";
+
+BA_DEF_ BO_ "GenMsgCycleTime" INT 0 65535;
+BA_DEF_DEF_ "GenMsgCycleTime" 0;
+BA_ "GenMsgCycleTime" BO_ 576 100;
+BA_ "GenMsgCycleTime" BO_ 577 100;
+BA_ "GenMsgCycleTime" BO_ 578 100;
+BA_ "GenMsgCycleTime" BO_ 579 100;
+BA_ "GenMsgCycleTime" BO_ 580 100;
+BA_ "GenMsgCycleTime" BO_ 581 100;
+BA_ "GenMsgCycleTime" BO_ 582 100;
+BA_ "GenMsgCycleTime" BO_ 583 100;
+BA_ "GenMsgCycleTime" BO_ 584 1000;
+BA_ "GenMsgCycleTime" BO_ 585 1000;
+BA_ "GenMsgCycleTime" BO_ 586 1000;
+BA_ "GenMsgCycleTime" BO_ 587 1000;
+BA_ "GenMsgCycleTime" BO_ 588 1000;
+BA_ "GenMsgCycleTime" BO_ 589 1000;
+BA_ "GenMsgCycleTime" BO_ 590 1000;
+BA_ "GenMsgCycleTime" BO_ 591 1000;
