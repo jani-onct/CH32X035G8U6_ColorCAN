@@ -126,6 +126,8 @@ wchisp --usb flash colorcan_can_bench.hex
 | [IRC27_ColorCAN_v1.0.0.kicad_pcb](kicad/IRC27_ColorCAN_v1.0.0.kicad_pcb) | 基板レイアウト |
 
 KiCadの3D表示はインストール済みのモデルを使います。USB-CとXAコネクタの個別モデルは手元のKiCadで追加できます。外観の確認にはREADME冒頭の3D画像も使えます。
+↓回路図，基板図ビューワ
+https://kicanvas.org/?github=https://github.com/jani-onct/CH32X035G8U6_ColorCAN/tree/main/kicad
 
 ### 回路図
 
