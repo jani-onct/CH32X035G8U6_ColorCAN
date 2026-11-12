@@ -1,11 +1,17 @@
 # ColorCAN
 
-TCS34725FNで測定した赤・緑・青・Clearの値を，Classic CANで送るカラーセンサ基板です．基板シルクは **v1.0.0**，CANのハートビートで通知するプロトコル版は **1** です．
+**ColorCANは，CH32X035G8U6内蔵のPIOCで1 MbpsのClassic CAN送信を実装したカラーセンサ基板です．** TCS34725FNで測定した赤・緑・青・Clearの値を送信します．基板シルクは **v1.0.0**，CANのハートビートで通知するプロトコル版は **1** です．
 
 <img src="images/usb-side.png" alt="ColorCANのUSB-C面．上部にセンサの実装位置と照明LED，下部にUSB-CとBOOTボタン" width="350">
 <img src="images/can-side.png" alt="ColorCANのCAN面．中央にDIPスイッチ，下部にJST XAコネクタ" width="350">
 
 基板の配置図はKiCadの3D表示です．この表示ではカラーセンサとマイコンの実装位置がパッドで見えます．DIPスイッチの操作方向は，基板のシルクにある `ON=1` と `TERM ON` を参照してください．
+
+## PIOCによるCAN送信
+
+**PIOC（Programmable Protocol I/O Controller）** は，CH32X035に内蔵されたI/O制御用の8ビットコアです．メインCPUから独立して命令を実行し，ピンの出力と読み取りのタイミングをクロック単位で制御できます．[WCHのPIOC解説](https://www.cnblogs.com/wchmcu/p/17678765.html)
+
+ColorCANのPIOC版FWでは，メインCPUがセンサを読み取り，CANフレームを組み立てます．PIOCはPC19（TX）からフレームを1ビットずつ出力し，PC18（RX）でバスの状態を読み返してACKを確認します．SN65HVD230がCAN_HとCAN_Lの差動信号を扱います．
 
 ## 動作の様子
 
@@ -85,7 +91,7 @@ CAN ID  DLC  データ（16進）
 
 ### TIM1＋DMA版とPIOC版のメモリ使用量
 
-ColorCAN v1.0.0向けの1 Mbps CAN試験FWを比較しました．PIOC版ではPC19でCANビットを送信し，PC18で信号を読み返します．CAN ID，RGBCとハートビートのデータ形式，送信周期は共通です．
+両FWのCAN ID，RGBCとハートビートのデータ形式，送信周期は共通です．
 
 | ビルド時の使用量 | TIM1＋DMA版 | PIOC版 | 差（PIOC版 − TIM1＋DMA版） |
 |---|---:|---:|---:|
