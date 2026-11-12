@@ -2,10 +2,10 @@
 
 TCS34725FNで測定した赤・緑・青・Clearの値を、Classic CANで送るカラーセンサ基板です。基板シルクは **v1.0.0**、CANのハートビートで通知するプロトコル版は **1** です。
 
-<img src="images/usb-side.png" alt="ColorCANのUSB-C面。上部にカラーセンサと照明LED、下部にUSB-CとBOOTボタン" width="350">
+<img src="images/usb-side.png" alt="ColorCANのUSB-C面。上部にセンサの実装位置と照明LED、下部にUSB-CとBOOTボタン" width="350">
 <img src="images/can-side.png" alt="ColorCANのCAN面。中央にDIPスイッチ、下部にJST XAコネクタ" width="350">
 
-基板の配置図はKiCadの3D表示です。DIPスイッチの操作方向は、基板の `ON=1` と `TERM ON` を参照してください。
+基板の配置図はKiCadの3D表示です。この表示ではカラーセンサとマイコンの実装位置がパッドで見えます。DIPスイッチの操作方向は、基板のシルクにある `ON=1` と `TERM ON` を参照してください。
 
 ## 基板仕様
 
