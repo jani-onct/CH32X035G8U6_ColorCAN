@@ -78,11 +78,27 @@ CAN ID  DLC  データ（16進）
 - [CAN仕様とデコード例](docs/CAN.md)
 - [CANデータベース（DBC、ノード0〜7）](docs/ColorCAN.dbc)
 
+## ファームウェアの書き込み
+
+[書き込み用HEX（colorcan_can_bench.hex）](firmware/colorcan_can_bench.hex) は、ColorCAN v1.0.0の実機で使っているCH32X035G8U6向けCAN試験FWです。
+
+1. J2からの給電を外し、基板の `BOOT` を押しながらUSB-CをPCに接続します。
+2. [wchisp](https://github.com/ch32-rs/wchisp) を使い、`wchisp --usb info` でチップが `CH32X035G8U6` と表示されることを確認します。
+3. HEXをダウンロードしたフォルダで次のコマンドを実行し、`Verify OK` を確認します。
+
+```sh
+wchisp --usb flash colorcan_can_bench.hex
+```
+
+書き込み後にUSBを挿し直す場合は、`BOOT` を押さずに接続すると通常起動します。
+
+- SHA-256 `e5137b95454fce0f72337260dc35df75672d55e5464d6f02d0543154b2a608ff`
+- [FWに含まれるch32funのライセンス](firmware/ch32fun-LICENSE.txt)
+
 ## USBデバッグ
 
 - 通常起動すると仮想COMポートにRGBCを約500 msごと、CAN送信の集計を約1秒ごとに出力します。COMポートの設定例は `115200` です。
 - ログの `ACK` は送信中に確認したACKの件数、`NACK` はACKなし、`BUSY` は送信前にバスが空いていなかった回数、`ERR` は読み返し不一致やDMAエラーなどです。
-- USB ISPで書き込む場合は、J2給電を外し、`BOOT` を押したままUSB-Cを接続します。USBで通常起動するときは `BOOT` を押さずに接続します。
 
 ## 基板内の信号
 
