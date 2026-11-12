@@ -1,4 +1,4 @@
-# IRC27 ColorCAN
+# ColorCAN
 
 TCS34725FNで測定した赤・緑・青・Clearの値を、Classic CANで送るカラーセンサ基板です。基板シルクは **v1.0.0**、CANのハートビートで通知するプロトコル版は **1** です。
 
