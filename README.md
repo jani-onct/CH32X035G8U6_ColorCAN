@@ -9,7 +9,7 @@ TCS34725FNで測定した赤・緑・青・Clearの値を、Classic CANで送る
 
 ## 動作の様子
 
-<img src="images/ColorCAN.mov" alt="知能ロボコンで使用されているママボールの色を見ている様子" width="350">
+https://github.com/jani-onct/CH32X035G8U6_ColorCAN/issues/1#issue-6348853291
 
 ## 基板仕様
 
