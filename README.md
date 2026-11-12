@@ -84,14 +84,14 @@ CAN ID  DLC  データ（16進）
 - **`0x240` RGBC** — 2バイトずつ読むと，R = 171，G = 181，B = 184，Clear = 532．
 - **`0x248` ハートビート** — プロトコル版1，測定有効，測定成功11回，起動から1,121 ms．
 
-両FWは**ColorCAN 1台が送信するベンチ試験用**です．複数の送信ノードが共存する運用バスに組み込むには，CANの調停，再送，エラー処理を備えた実装が必要です．ベンチ試験ではノード0の両フレームを受信確認済みです．
+各FWは**ColorCAN 1台が送信するベンチ試験用**です．複数の送信ノードが共存する運用バスに組み込むには，CANの調停，再送，エラー処理を備えた実装が必要です．ベンチ試験ではノード0の両フレームを受信確認済みです．
 
 - [CAN仕様とデコード例](docs/CAN.md)
 - [CANデータベース（DBC，ノード0〜7）](docs/ColorCAN.dbc)
 
-### TIM1＋DMA版とPIOC版のメモリ使用量
+### ch32fun版のTIM1＋DMAとPIOCのメモリ使用量
 
-両FWのCAN ID，RGBCとハートビートのデータ形式，送信周期は共通です．
+各FWのCAN ID，RGBCとハートビートのデータ形式，送信周期は共通です．
 
 | ビルド時の使用量 | TIM1＋DMA版 | PIOC版 | 差（PIOC版 − TIM1＋DMA版） |
 |---|---:|---:|---:|
@@ -101,16 +101,19 @@ CAN ID  DLC  データ（16進）
 
 PIOC版では，送受信に使っていたDMAバッファ計1,080 Bが不要になり，TIM1とDMAの2チャネルが空きます．PIOC命令は184 Bです．メインCPU用のRAMは16 KiBで，残りの4 KiBをPIOC用に予約しています．メインCPUは送信完了をポーリングします．CPU負荷とスタックのピーク使用量は未計測です．
 
-PIOC版の実機試験では，ノード0のRGBC（`0x240`）とハートビート（`0x248`）が1 Mbpsの受信機に届き，RGBCの受信カウンタが増えることを確認しました．
+ch32funのPIOC版を使った実機試験では，ノード0のRGBC（`0x240`）とハートビート（`0x248`）が1 Mbpsの受信機に届き，RGBCの受信カウンタが増えることを確認しました．
 
 ## ファームウェアの書き込み
 
-ColorCAN v1.0.0（CH32X035G8U6）用です．両方のHEXを実機で確認済みです．
+ColorCAN v1.0.0（CH32X035G8U6）用です．ch32fun版は実機でCANを受信確認済みです．Arduino版はUSB ISPでの書き込みとベリファイを確認済みです．
 
 | 実装 | 書き込み用HEX | SHA-256 |
 |---|---|---|
 | TIM1＋DMA版 | [colorcan_can_bench.hex](firmware/colorcan_can_bench.hex) | `e5137b95454fce0f72337260dc35df75672d55e5464d6f02d0543154b2a608ff` |
-| PIOC版 | [colorcan_can_pioc.hex](firmware/colorcan_can_pioc.hex) | `1e422510251ff6a533be32441a781ffb076a6dc97d74cc8b8e29d4a9e3a904bd` |
+| PIOC版（ch32fun） | [colorcan_can_pioc.hex](firmware/colorcan_can_pioc.hex) | `1e422510251ff6a533be32441a781ffb076a6dc97d74cc8b8e29d4a9e3a904bd` |
+| PIOC版（Arduino） | [colorcan_can_pioc_arduino.hex](firmware/colorcan_can_pioc_arduino.hex) | `d5f5aad851115a2fc54eebe81fec8b35ea951dc252fb6bb9a10da01881828f88` |
+
+Arduino版のソースとビルド手順は[Arduino版FWの説明](firmware/arduino/README.md)を参照してください．
 
 1. J2からの給電を外し，基板の `BOOT` を押しながらUSB-CをPCに接続します．
 2. [wchisp](https://github.com/ch32-rs/wchisp) を使い，`wchisp --usb info` でチップが `CH32X035G8U6` と表示されることを確認します．
@@ -122,19 +125,28 @@ ColorCAN v1.0.0（CH32X035G8U6）用です．両方のHEXを実機で確認済�
 wchisp --usb flash colorcan_can_bench.hex
 ```
 
-**PIOC版**
+**PIOC版（ch32fun）**
 
 ```sh
 wchisp --usb flash colorcan_can_pioc.hex
+```
+
+**PIOC版（Arduino）**
+
+```sh
+wchisp --usb flash colorcan_can_pioc_arduino.hex
 ```
 
 書き込み後にUSBを挿し直す場合は，`BOOT` を押さずに接続すると通常起動します．
 
 ### ファームウェアに含まれる第三者コード
 
-両方のHEXに[ch32fun](https://github.com/cnlohr/ch32fun)が含まれます．ch32funの著作権表示とMITライセンス全文を同梱しています．[ch32funのライセンス全文](firmware/ch32fun-LICENSE.txt)
+- ch32fun版には[ch32fun](https://github.com/cnlohr/ch32fun)が含まれます．[ch32funの著作権表示とMITライセンス全文](firmware/ch32fun-LICENSE.txt)
+- Arduino版にはWCH Arduino Coreが含まれます．[ライセンスと対応ソース](firmware/arduino/README.md#ライセンスと対応ソース)
 
-## USBデバッグ
+## デバッグ出力
+
+Arduino版はPA2（TX）のUARTに115200 bpsで出力します．ch32fun版のログはUSB仮想COMで確認できます．
 
 - 通常起動すると仮想COMポートにRGBCを約500 msごと，CAN送信の集計を約1秒ごとに出力します．COMポートの設定例は `115200` です．
 - ログの `ACK` は送信中に確認したACKの件数，`NACK` はACKなし，`BUSY` は送信前にバスが空いていなかった回数，`ERR` は読み返し不一致やDMAエラーなどです．
