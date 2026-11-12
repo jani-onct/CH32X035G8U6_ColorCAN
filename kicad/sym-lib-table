@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "TCS34725FN")(type "KiCad")(uri "${KIPRJMOD}/libraries/TCS34725FN.kicad_sym")(options "")(descr ""))
+  (lib (name "my_device")(type "KiCad")(uri "${KIPRJMOD}/libraries/my_device.kicad_sym")(options "")(descr ""))
+)

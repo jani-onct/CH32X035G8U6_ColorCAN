@@ -18,7 +18,7 @@ TCS34725FNで測定した赤・緑・青・Clearの値を、Classic CANで送る
 | 電源 | 5 V入力。XC6206P332MR-Gで基板内の3.3 Vを生成 |
 | USB-C（J1） | 5 V給電、USB ISP書き込み、仮想COMでのデバッグ |
 | CAN（J2） | JST XA 4極、2.5 mmピッチ、横型（S04B-XASK-1）。SN65HVD230使用、Rsは10 kΩでGNDへ接続 |
-| DIP（SW1） | OTAX KHS42E、4連。3連でノード番号、1連で120 ΩのCAN終端を設定 |
+| DIP（SW1） | [OTAX KHS42E（秋月電子・108929）](https://akizukidenshi.com/catalog/g/g108929/)、4連。3連でノード番号、1連で120 ΩのCAN終端を設定 |
 
 ## 配線とDIP設定
 
@@ -58,7 +58,7 @@ KHS42Eを取り付ける場合は、本体の `ON` 印字を左、本体の `1` 
 
 1. ColorCAN 1台と、1 MbpsのCAN受信機1台を短い配線でつなぎます。CAN_H同士、CAN_L同士、GND同士を接続し、両端を120 Ωで終端します。
 2. 受信機を通常モード（ACKあり）に設定します。まずID用DIPをすべてOFFにしてColorCANを起動すると、ノード番号は `0` です。
-3. 受信機で `0x240` のRGBCと `0x248` のハートビートを確認します。IRC27 ParameterGatewayではWeb UIの「ColorCAN受信」に表示されます。
+3. USB-CANアダプターなどの受信ツールで、`0x240` のRGBCと `0x248` のハートビートを確認します。
 
 ### CANメッセージの例
 
@@ -73,7 +73,7 @@ CAN ID  DLC  データ（16進）
 - **`0x240` RGBC** — 2バイトずつ読むと、R = 171、G = 181、B = 184、Clear = 532。
 - **`0x248` ハートビート** — プロトコル版1、測定有効、測定成功11回、起動から1,121 ms。
 
-このFWは**ColorCAN 1台が送信するベンチ試験用**です。CH32X035のTIM1とDMAで送信と信号の読み返しを行います。複数の送信ノードが共存する運用バスに組み込むには、CANの調停、再送、エラー処理を備えた実装が必要です。ベンチではParameterGatewayでノード0の両フレームを受信確認済みです。
+このFWは**ColorCAN 1台が送信するベンチ試験用**です。CH32X035のTIM1とDMAで送信と信号の読み返しを行います。複数の送信ノードが共存する運用バスに組み込むには、CANの調停、再送、エラー処理を備えた実装が必要です。ベンチ試験ではノード0の両フレームを受信確認済みです。
 
 - [CAN仕様とデコード例](docs/CAN.md)
 - [CANデータベース（DBC、ノード0〜7）](docs/ColorCAN.dbc)
@@ -111,6 +111,16 @@ wchisp --usb flash colorcan_can_bench.hex
 | UARTテストパッド | PA2（TX）、PA3（RX） | TP1、TP2 |
 
 ## 回路図・基板寸法図
+
+編集用の[KiCad 9プロジェクト](kicad/)も公開しています。リポジトリをダウンロードし、`kicad/IRC27_ColorCAN_v1.0.0.kicad_pro` を開いてください。KiCadの標準ライブラリと、同梱のプロジェクト専用ライブラリを使います。
+
+| ファイル | 内容 |
+|---|---|
+| [IRC27_ColorCAN_v1.0.0.kicad_pro](kicad/IRC27_ColorCAN_v1.0.0.kicad_pro) | プロジェクトと設計ルール |
+| [IRC27_ColorCAN_v1.0.0.kicad_sch](kicad/IRC27_ColorCAN_v1.0.0.kicad_sch) | 回路図 |
+| [IRC27_ColorCAN_v1.0.0.kicad_pcb](kicad/IRC27_ColorCAN_v1.0.0.kicad_pcb) | 基板レイアウト |
+
+KiCadの3D表示はインストール済みのモデルを使います。USB-CとXAコネクタの個別モデルは手元のKiCadで追加できます。外観の確認にはREADME冒頭の3D画像も使えます。
 
 ### 回路図
 
