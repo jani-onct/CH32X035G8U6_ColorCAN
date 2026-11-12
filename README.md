@@ -9,7 +9,7 @@ TCS34725FNで測定した赤・緑・青・Clearの値を、Classic CANで送る
 
 ## 動作の様子
 
-https://github.com/jani-onct/CH32X035G8U6_ColorCAN/issues/1#issue-6348853291
+<p><a href="https://github.com/jani-onct/CH32X035G8U6_ColorCAN/issues/1#issue-6348853291" target="_blank">動作の様子</a></p>
 
 ## 基板仕様
 
